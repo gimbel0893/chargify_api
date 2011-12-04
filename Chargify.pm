@@ -42,6 +42,7 @@ sub init
     $ua->credentials( $self->{subdomain} . '.chargify.com:443', 'Chargify API', '_lQy5ce7fnheZ-SlmdEH', 'x' );
     $ua->default_header( 'Content-Type' => 'application/json' );
     $ua->default_header( 'Accept' => 'application/json' );
+    $ua->agent( '' );
 
     return $self;
 }
@@ -132,14 +133,27 @@ sub call_subscription
 
     my $ua = $self->{_ua};
     my $data = {
-        product_handle => $self->{product_handle},
+        subscription => {
+            product_handle => $self->{product_handle},
+            customer_attributes => {
+                first_name => 'Joe',
+                last_name => 'Blow',
+                email => 'joe3@example.com',
+            },
+            credit_card_attributes => {
+                full_number => 1,
+                expiration_month => 10,
+                expiration_year => 2020,
+            },
+        },
     };
     my $json_data = JSON::encode_json( $data );
     warn $json_data;
     warn Dumper( $ua->default_headers() );
-    my $response = $ua->post( 'https://picketreport-testing.chargify.com/subscriptions.json', $json_data );
+    my $request = HTTP::Request->new( 'POST', 'https://picketreport-testing.chargify.com/subscriptions.json', $ua->default_headers(), $json_data );
+    my $response = $ua->request( $request );
 
-#curl -u _lQy5ce7fnheZ-SlmdEH:x -H Accept:application/json -H Content-Type:application/json -d '{"product_handle":"basic"}' https://picketreport-testing.chargify.com/subscriptions.json
+#curl -u _lQy5ce7fnheZ-SlmdEH:x -H Accept:application/json -H Content-Type:application/json -d '{"subscription":{ "product_handle":"basic", "customer_attributes":{ "first_name":"Joe", "last_name":"Blow", "email":"joe2@example.com" }, "credit_card_attributes":{ "full_number":"1", "expiration_month":"10", "expiration_year":"2020" } }}' https://picketreport-testing.chargify.com/subscriptions.json
 
     if( $response->is_success() )
     {

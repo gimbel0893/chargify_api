@@ -1,0 +1,30 @@
+<html>
+    <head>
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load( 'jquery', '1.7.1' );
+</script>
+<script type="text/javascript" src="chargify.js"></script>
+
+    </head>
+    <body>
+
+<div class="main">
+    <div class="form">
+
+<form method="POST" action="https://api.chargify.com/api/v2/signups">
+    <input type="hidden" name="secure[api_id]" value="_lQy5ce7fnheZ-SlmdEH" />
+    <input type="hidden" name="secure[timestamp]" value="1322958455" />
+    <input type="hidden" name="secure[nonce]" value="EzBQnGQ9z0YC3GdLHXom8HJILqSI2vbY1YXQQV7t" />
+    <input type="hidden" name="secure[data]" value="redirect_uri=picketreport-testing&signup[product][id]=78144&signup[product][handle]=basic" />
+    <input type="hidden" name="secure[signature]" value="7ac23dc43ca98fe4e5bf9b4d5404ad06ef3dc1d1" />
+
+    <input type="button" value="Submit" class="chargify_btn_submit" />
+</form>
+
+    </div>
+</div>
+
+    </body>
+</html>
