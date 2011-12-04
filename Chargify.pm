@@ -136,14 +136,21 @@ sub call_subscription
         subscription => {
             product_handle => $self->{product_handle},
             customer_attributes => {
-                first_name => 'Joe',
-                last_name => 'Blow',
-                email => 'joe3@example.com',
+                first_name => 'first 1',
+                last_name => 'last 1',
+                email => 'email1@example.com',
+                organization => 'organization 1',
             },
             credit_card_attributes => {
                 full_number => 1,
                 expiration_month => 10,
                 expiration_year => 2020,
+                first_name => 'first 1',
+                last_name => 'last 1',
+                billing_address => 'address 1',
+                billing_city => 'city 1',
+                billing_state => 'MI',
+                billing_zip => '12345',
             },
         },
     };
